@@ -58,11 +58,11 @@ gv.spi1.max_speed_hz = 6000000 #60000000
 
 GPIO.setmode(GPIO.BCM) #number meaning = gpio
 
-
-gpio_sleep_enable = 6 #7
-gpio_rom_update_enable = 7 #14
-gpio_new_bf_data = 4 #16
-gpio_spi_reset_n = 5 #17
+# GPIO numbers of Main board; Left 1.0 / Right 2.0
+gpio_sleep_enable = 7		# 6 / 7
+gpio_rom_update_enable = 14	# 7 / 14
+gpio_new_bf_data = 16		# 4 / 16
+gpio_spi_reset_n = 17		# 5 / 17
 
 GPIO.setup(gpio_sleep_enable, GPIO.OUT)
 GPIO.setup(gpio_rom_update_enable, GPIO.OUT)
