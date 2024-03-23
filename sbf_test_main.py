@@ -15,7 +15,7 @@ import runpy
 # parameter
 #=======================================================================
 
-gv.CMD_TYPE = 2  #0 = count, 1 = bf_rms, 2 = mic, 3 = all
+gv.CMD_TYPE = 1  #0 = count, 1 = bf_rms, 2 = mic, 3 = all
 gv.PKT_BYTE_LEN_MAX = 4095 #3072 #multiple of 3!!!
 
 gv.IS_SET_BPF = 1
@@ -23,8 +23,8 @@ gv.IS_IIR_COEF_20_30 = 0
 
 #---------------set common reg
 gv.MIC_SEL = 0 #111 #0~111
-gv.TEST_ENABLE = 1
-gv.TEST_FREQ = 25 #1~50
+gv.TEST_ENABLE = 0
+gv.TEST_FREQ = 20 #1~50
 gv.IS_MIC_AFE = 0 #if 1, mic data is AFE (before BPF)
 
 gv.GAIN = 1 #(0.02 = -40dB when fpga 0.5 mag gen)
@@ -42,7 +42,7 @@ gv.spi0.open(0,0)
 
 gv.spi0.mode = 0
 gv.spi0.lsbfirst=False
-gv.spi0.max_speed_hz = 20000000 #60000000
+gv.spi0.max_speed_hz = 15000000 #15MHz for SPI0 (Upto 22MHz possible)
 
 #------------------------------------------------
 # Enable SPI1
@@ -51,22 +51,21 @@ gv.spi1.open(1,0) #cs0 = pin12/GPIO18
 
 gv.spi1.mode = 0
 gv.spi1.lsbfirst=False
-gv.spi1.max_speed_hz = 6000000 #60000000
+gv.spi1.max_speed_hz = 6000000 #6MHz for SPI1
 
 #------------------------------------------------
 # GPIO
 
-GPIO.setmode(GPIO.BCM) #number meaning = gpio
+GPIO.setmode(GPIO.BCM) #number meaning = gpio number, not pin number
 
 # GPIO numbers of Main board; Left 1.0 / Right 2.0
-gpio_sleep_enable = 7		# 6 / 7
-gpio_rom_update_enable = 14	# 7 / 14
+gpio_sleep_enable = 7		# 6 / 7 (GPIO 7 can be used as SPI0_CE1, so SPI0_CE1 must be disabled. Use CE0 for SPI0)
+gpio_rom_update_enable = 14	# 7 / 14 (GPIO 14 can be used ash UART_TXD, so UART of PI must be disabled)
 gpio_new_bf_data = 16		# 4 / 16
 gpio_spi_reset_n = 17		# 5 / 17
 
 GPIO.setup(gpio_sleep_enable, GPIO.OUT)
 GPIO.setup(gpio_rom_update_enable, GPIO.OUT)
-# ~ GPIO.setup(gpio_new_bf_data, GPIO.IN) # pull_up_down=GPIO.PUD_UP
 GPIO.setup(gpio_spi_reset_n, GPIO.OUT)
 
 #------------------------------------------------
