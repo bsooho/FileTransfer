@@ -316,7 +316,9 @@ while True:
 	# view bf data    
     if gv.flag_bf == 1:
         gv.flag_bf = 0
-        
+
+	fig.canvas.draw()
+	    
         #-------------------------------------------------------------
         # bf map
         # ~ print('>>>>>>>>>>>>>>')
@@ -400,6 +402,9 @@ while True:
 	# view mic data
     if gv.flag_mic == 1:
         gv.flag_mic = 0
+
+    	fig.canvas.draw()
+
         print(gv.mic_data[:20])
         
         #----------------------------------
