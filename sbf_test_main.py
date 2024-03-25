@@ -307,6 +307,9 @@ pow_constant  = pow_constant  / 2**23
 #integer u48 -> u13.35 : /2^35
 pow_rms_constant = 1/(2**35  * BF_BLOCK_LEN)
 
+# drawing initilization something
+if gv.CMD_TYPE == 1 or gv.CMD_TYPE == 2:
+        fig.canvas.draw()
 
 while True: 
     time.sleep(0.1)
@@ -316,9 +319,7 @@ while True:
 	# view bf data    
     if gv.flag_bf == 1:
         gv.flag_bf = 0
-
-	fig.canvas.draw()
-	    
+    
         #-------------------------------------------------------------
         # bf map
         # ~ print('>>>>>>>>>>>>>>')
@@ -403,9 +404,7 @@ while True:
     if gv.flag_mic == 1:
         gv.flag_mic = 0
 
-    	fig.canvas.draw()
-
-        print(gv.mic_data[:20])
+	print(gv.mic_data[:20])
         
         #----------------------------------
         # update y data  
